@@ -30,10 +30,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('users', UserController::class);
-    Route::resource('pasien', PasienController::class);
-    Route::resource('spesialisasi', SpesialisasiController::class);
-    Route::resource('dokter', DokterController::class);
-    Route::resource('jadwal', JadwalController::class);
-});
+Route::resource('users', UserController::class);
+Route::resource('pasien', PasienController::class);
+Route::resource('spesialisasi', SpesialisasiController::class);
+Route::resource('dokter', DokterController::class);
+Route::resource('jadwal', JadwalController::class);
