@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class SpesialisasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $spesialisasi = Spesialisasi::all();

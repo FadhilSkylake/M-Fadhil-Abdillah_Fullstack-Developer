@@ -20,6 +20,8 @@ use App\Http\Controllers\SpesialisasiController;
 |
 */
 
+Route::resource('/', LandingController::class);
+
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
@@ -28,9 +30,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('/', LandingController::class);
-Route::resource('users', UserController::class);
-Route::resource('pasien', PasienController::class);
-Route::resource('spesialisasi', SpesialisasiController::class);
-Route::resource('dokter', DokterController::class);
-Route::resource('jadwal', JadwalController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('users', UserController::class);
+    Route::resource('pasien', PasienController::class);
+    Route::resource('spesialisasi', SpesialisasiController::class);
+    Route::resource('dokter', DokterController::class);
+    Route::resource('jadwal', JadwalController::class);
+});

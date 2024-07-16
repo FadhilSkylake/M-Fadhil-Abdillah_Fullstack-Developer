@@ -17,4 +17,10 @@ class CheckAuth
     {
         return $next($request);
     }
+
+    protected $routeMiddleware = [
+        // Middleware lainnya
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        // Middleware lainnya
+    ];
 }
