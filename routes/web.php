@@ -6,7 +6,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SpesialisasiController;
 
 /*
@@ -20,6 +20,13 @@ use App\Http\Controllers\SpesialisasiController;
 |
 */
 
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::resource('/', LandingController::class);
 Route::resource('users', UserController::class);
@@ -27,18 +34,3 @@ Route::resource('pasien', PasienController::class);
 Route::resource('spesialisasi', SpesialisasiController::class);
 Route::resource('dokter', DokterController::class);
 Route::resource('jadwal', JadwalController::class);
-
-Route::get('login', [LoginController::class, 'index']);
-Route::post('register', [LoginController::class, 'register']);
-Route::post('login', [LoginController::class, 'login']);
-Route::post('reset-password', [LoginController::class, 'resetPassword']);
-
-Route::middleware('auth:api')->group(function () {
-    // Protected routes
-    Route::get('user', function () {
-        return response()->json(auth()->user());
-    });
-
-    Route::post('refresh', [LoginController::class, 'refresh']);
-    Route::post('logout', [LoginController::class, 'logout']);
-});

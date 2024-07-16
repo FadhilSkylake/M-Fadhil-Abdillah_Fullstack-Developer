@@ -7,9 +7,6 @@
   <title>HOSPITAL LOGIN</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -24,16 +21,19 @@
             <div class="card mb-0">
               <div class="card-body">
                 <h1><a href="#">HOSPITAL LOGIN PAGE</a></h1>
+                @if (session('message'))
+                <p>{{ session('message') }}</p>
+                @endif
                 <p class="text-center">Silahkan Login</p>
-                <form id="login-form">
+                <form action="{{ route('login') }}" method="POST">
                     <?= csrf_field(); ?>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Username atau Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
                     </div>
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <div class="form-check">
@@ -59,79 +59,7 @@
   </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    $(document).ready(function() {
-        $('#login-form').on('submit', function(e) {
-            e.preventDefault();
-            var email = $('#email').val();
-            var password = $('#password').val();
-
-            $.ajax({
-                url: '/api/login',
-                type: 'POST',
-                data: {
-                    email: email,
-                    password: password
-                },
-                success: function(response) {
-                    // Save token to local storage or cookies
-                    localStorage.setItem('token', response.token);
-                    alert('Login successful!');
-                    $('#login-form').hide();
-                    $('#logout-btn').show();
-                },
-                error: function(xhr) {
-                    // Handle errors more precisely
-                    var errorMessage = 'Login failed: ';
-                    if (xhr.responseJSON && xhr.responseJSON.error) {
-                        errorMessage += xhr.responseJSON.error;
-                    } else if (xhr.status === 0) {
-                        errorMessage += 'Network error';
-                    } else {
-                        errorMessage += 'Unknown error';
-                    }
-                    alert(errorMessage);
-                }
-            });
-        });
-
-        $('#logout-btn').on('click', function() {
-            var token = localStorage.getItem('token');
-
-            $.ajax({
-                url: '/api/logout',
-                type: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                },
-                success: function(response) {
-                    // Remove token from local storage or cookies
-                    localStorage.removeItem('token');
-                    alert('Logout successful!');
-                    $('#login-form').show();
-                    $('#logout-btn').hide();
-                },
-                error: function(xhr) {
-                    var errorMessage = 'Logout failed: ';
-                    if (xhr.responseJSON && xhr.responseJSON.error) {
-                        errorMessage += xhr.responseJSON.error;
-                    } else if (xhr.status === 0) {
-                        errorMessage += 'Network error';
-                    } else {
-                        errorMessage += 'Unknown error';
-                    }
-                    alert(errorMessage);
-                }
-            });
-        });
-
-        // Check if token exists
-        if (localStorage.getItem('token')) {
-            $('#login-form').hide();
-            $('#logout-btn').show();
-        }
-    });
-</script>
+  
 </body>
 
 </html>

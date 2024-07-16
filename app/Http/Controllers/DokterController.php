@@ -2,63 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokter;
+use App\Models\Spesialisasi;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $dokters = Dokter::with('spesialisasi')->get();
+        return view('dokter.index', compact('dokters'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $spesialisasis = Spesialisasi::all();
+        return view('dokter.create', compact('spesialisasis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_dokter' => 'required|string|max:255',
+            'spesialisasi_id' => 'required|exists:spesialisasi,id_spesialisasi',
+            'jadwal_kerja' => 'required|string|max:255',
+        ]);
+
+        Dokter::create($request->all());
+        return redirect()->route('dokter.index')->with('success', 'Dokter berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Dokter $dokter)
     {
-        //
+        $spesialisasis = Spesialisasi::all();
+        return view('dokter.edit', compact('dokter', 'spesialisasis'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Dokter $dokter)
     {
-        //
+        $request->validate([
+            'nama_dokter' => 'required|string|max:255',
+            'spesialisasi_id' => 'required|exists:spesialisasi,id_spesialisasi',
+            'jadwal_kerja' => 'required|string|max:255',
+        ]);
+
+        $dokter->update($request->all());
+        return redirect()->route('dokter.index')->with('success', 'Dokter berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Dokter $dokter)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $dokter->delete();
+        return redirect()->route('dokter.index')->with('success', 'Dokter berhasil dihapus.');
     }
 }
