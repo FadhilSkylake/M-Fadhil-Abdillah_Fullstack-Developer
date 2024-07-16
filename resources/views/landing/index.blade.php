@@ -120,27 +120,36 @@
 
         <div class="row mt-5 justify-content-center">
           <div class="col-lg-10">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="{{ route('pasien.store') }}" method="POST" role="form" class="php-email-form">
+              @csrf
+              @method('POST')
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  <input type="text" name="nama_pasien" class="form-control" id="nama_pasien" placeholder="Nama Pasien" required>
+                  @error('nama_pasien')
+                  <div>{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  <input type="number" class="form-control" name="usia" id="usia" placeholder="Usia" required>
+                  @error('usia')
+                  <div>{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="No HP" required>
+                  @error('no_hp')
+                  <div>{{ $message }}</div>
+                  @enderror
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                <textarea class="form-control" name="alamat" rows="5" placeholder="Alamat" required></textarea>
+                @error('alamat')
+                  <div>{{ $message }}</div>
+                  @enderror
               </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <button class="btn btn-primary" type="submit">Create</button>
             </form>
           </div>
 
