@@ -14,7 +14,7 @@
               <tr>
                 <th class="border-bottom-0">No</th>
                 <th class="border-bottom-0">Username</th>
-                <th class="border-bottom-0">Action</th>
+                <th class="border-bottom-0">Email</th>
               </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                   <p class="mb-0 fw-normal">{{ $user->username }}</p>
                 </td>
                 <td class="border-bottom-0">
-                  <p class="mb-0 fw-normal">{{ $user->password }}</p>
+                  <p class="mb-0 fw-normal">{{ $user->email }}</p>
                 </td>
               </tr>
               @endforeach

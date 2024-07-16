@@ -17,7 +17,7 @@
             <span class="hide-menu">User</span>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('/') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('users') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-layout-dashboard"></i>
               </span>
@@ -29,7 +29,7 @@
             <span class="hide-menu">Data</span>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('/ui-buttons') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('/pasien') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-article"></i>
               </span>
@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('/ui-alerts') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('/riwayat') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-alert-circle"></i>
               </span>
@@ -45,7 +45,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('/ui-card') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('/spesialisasi') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-cards"></i>
               </span>
@@ -53,7 +53,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('/ui-forms') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('/dokter') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-file-description"></i>
               </span>
@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('/ui-forms') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('/jadwal') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-file-description"></i>
               </span>
