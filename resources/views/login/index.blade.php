@@ -25,7 +25,7 @@
                 <p>{{ session('message') }}</p>
                 @endif
                 <p class="text-center">Silahkan Login</p>
-                <form action="{{ route('login') }}" method="POST">
+                <form id="loginForm" method="POST">
                     <?= csrf_field(); ?>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -59,6 +59,40 @@
   </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+     $(document).ready(function() {
+            $('#loginForm').on('submit', function(event) {
+                event.preventDefault();
+                
+                const email = $('#email').val();
+                const password = $('#password').val();
+
+                $.ajax({
+                    url: 'http://localhost:8000/api/login',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        email: email,
+                        password: password
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            // Store the JWT token in local storage or cookie
+                            localStorage.setItem('jwtToken', response.token);
+
+                            // Redirect to the /users page
+                            window.location.href = '/users';
+                        } else {
+                            alert('Login failed. Please check your credentials.');
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred. Please try again.');
+                    }
+                });
+            });
+        });
+  </script>
   
 </body>
 

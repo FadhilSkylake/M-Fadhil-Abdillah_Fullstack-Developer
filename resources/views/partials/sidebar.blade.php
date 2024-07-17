@@ -17,7 +17,7 @@
             <span class="hide-menu">User</span>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ url('users') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ url('/users') }}" aria-expanded="false">
               <span>
                 <i class="ti ti-layout-dashboard"></i>
               </span>

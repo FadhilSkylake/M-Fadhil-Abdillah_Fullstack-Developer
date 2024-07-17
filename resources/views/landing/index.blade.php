@@ -120,7 +120,7 @@
 
         <div class="row mt-5 justify-content-center">
           <div class="col-lg-10">
-            <form action="{{ route('pasien.store') }}" method="POST" role="form" class="php-email-form">
+            <form action="{{ route('landing.store') }}" method="POST" role="form" class="php-email-form">
               @csrf
               @method('POST')
               <div class="row">

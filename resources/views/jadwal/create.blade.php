@@ -44,7 +44,12 @@
         </div>
         <div class="mb-3  w-25">
             <label for="status" class="form-label">Status:</label>
-            <input type="text" class="form-control" id="status" name="status" value="{{ old('status') }}">
+            <select id="status" class="form-select" name="status" required>
+                <option selected disabled>Pilih Status</option>
+                    <option value="Waiting">Waiting</option>
+                    <option value="On Checkup">On Checkup</option>
+                    <option value="finished">finished</option>
+            </select>
             @error('status')
                 <div>{{ $message }}</div>
             @enderror

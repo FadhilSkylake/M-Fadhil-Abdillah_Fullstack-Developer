@@ -20,8 +20,10 @@ use App\Http\Controllers\SpesialisasiController;
 |
 */
 
-Route::resource('/', LandingController::class);
+// Route::resource('/', LandingController::class);
 
+Route::get('/', [LandingController::class, 'index'])->name('landing.index');
+Route::post('/landing/store', [LandingController::class, 'store'])->name('landing.store');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
